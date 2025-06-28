@@ -1,0 +1,23 @@
+{
+  "name": "citrus-host-agent-testing",
+  "version": "1.0.0",
+  "description": "Agent load testing scripts for Citrus Host",
+  "main": "agent-load.js",
+  "scripts": {
+    "test": "node agent-load.js",
+    "load-test": "node agent-load.js 5",
+    "stress-test": "node agent-load.js 20"
+  },
+  "dependencies": {
+    "ws": "^8.14.2",
+    "dotenv": "^16.3.1"
+  },
+  "keywords": [
+    "testing",
+    "websocket",
+    "load-testing",
+    "agents"
+  ],
+  "author": "Citrus Host",
+  "license": "ISC"
+} 

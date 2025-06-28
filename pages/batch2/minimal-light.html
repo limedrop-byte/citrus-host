@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Minimal Light</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #FFFFFF;
+            --text: #1D1D1F;
+            --text-secondary: #86868B;
+            --accent: #0071E3;
+            --accent-light: #0077ED;
+            --surface: #F5F5F7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro Display', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        header {
+            padding: 1.2rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            background: linear-gradient(180deg, var(--background) 0%, var(--surface) 100%);
+        }
+
+        .content {
+            max-width: 980px;
+            width: 100%;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #1D1D1F 0%, #434343 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.7rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.022em;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .primary-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .primary-button:hover {
+            background: var(--accent-light);
+        }
+
+        .secondary-button {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .secondary-button:hover {
+            text-decoration: underline;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 18px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="nav">
+                <a href="#" class="logo">citrus</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content">
+                <h1 class="title">WordPress hosting, refined.</h1>
+                <p class="subtitle">Experience the perfect balance of power and simplicity.</p>
+                
+                <div class="cta-container">
+                    <a href="#" class="primary-button">Get Started</a>
+                    <a href="#" class="secondary-button">Learn more ›</a>
+                </div>
+
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">⚡️</div>
+                        <h3 class="feature-title">Lightning Fast</h3>
+                        <p class="feature-description">Engineered for speed with next-generation infrastructure.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">Enterprise Security</h3>
+                        <p class="feature-description">Advanced protection built into every layer.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Effortless Control</h3>
+                        <p class="feature-description">Intuitive tools that put you in command.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

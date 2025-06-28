@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Modern WordPress Hosting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --citrus: #FF9500;
+            --citrus-light: #FFB84D;
+            --citrus-dark: #E67E00;
+            --lime: #CCFF00;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --terminal-bg: #1A1A1A;
+            --terminal-text: #F5F5F5;
+            --text: #1A1A1A;
+            --text-secondary: #666666;
+            --gradient: linear-gradient(135deg, var(--citrus) 0%, #FF5500 100%);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(0deg);
+        }
+
+        .logo-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 1.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.05;
+            background: 
+                radial-gradient(circle at 20% 20%, var(--citrus) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, var(--lime) 0%, transparent 40%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 149, 0, 0.1);
+            border-radius: 100px;
+            color: var(--citrus-dark);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge-icon {
+            font-size: 1.25rem;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Terminal */
+        .terminal-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .terminal-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient);
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .decoration-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .decoration-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            background: var(--lime);
+        }
+
+        .terminal {
+            background: var(--terminal-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 1;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .terminal:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(255, 149, 0, 0.2);
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-close { background: #FF5F56; }
+        .dot-minimize { background: #FFBD2E; }
+        .dot-expand { background: #27C93F; }
+
+        .terminal-title {
+            flex-grow: 1;
+            text-align: center;
+            color: var(--terminal-text);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-left: -76px; /* Offset for perfect center alignment */
+        }
+
+        .terminal-body {
+            padding: 2rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--terminal-text);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .command-line {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .prompt {
+            color: var(--citrus);
+            margin-right: 1rem;
+        }
+
+        .command {
+            color: var(--terminal-text);
+        }
+
+        .output {
+            margin: 1rem 0 2rem;
+            padding-left: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .highlight {
+            color: var(--lime);
+            font-weight: 500;
+        }
+
+        .success {
+            color: #27C93F;
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 180px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 149, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 149, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--citrus);
+            color: var(--citrus);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .terminal {
+                font-size: 0.8rem;
+            }
+
+            .terminal:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🍊</div>
+                    <div class="logo-text">citrus</div>
+                </a>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-bg"></div>
+            
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-icon">⚡️</span>
+                    <span>Developer-First WordPress Platform</span>
+                </div>
+                <h1 class="hero-title">Make WordPress <span>development</span><br>a breeze</h1>
+                <p class="hero-subtitle">Experience the most refreshing way to build, deploy, and scale WordPress sites. Crafted for developers who love clean code and smooth workflows.</p>
+                <div class="button-group">
+                    <button class="btn btn-primary">Deploy Your Site</button>
+                    <button class="btn btn-secondary">Watch Demo</button>
+                </div>
+            </div>
+
+            <div class="terminal-wrapper">
+                <div class="terminal-decoration decoration-1"></div>
+                <div class="terminal-decoration decoration-2"></div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot dot-close"></div>
+                            <div class="dot dot-minimize"></div>
+                            <div class="dot dot-expand"></div>
+                        </div>
+                        <div class="terminal-title">citrus-cli ~ fresh-project</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">citrus init my-awesome-site</span>
+                        </div>
+                        <div class="output">
+                            🚀 Initializing new WordPress project...
+                            <br><br>
+                            → Creating Docker environment
+                            <br>
+                            → Setting up development tools
+                            <br>
+                            → Installing WordPress core
+                            <br>
+                            → Configuring local environment
+                            <br><br>
+                            <span class="success">✓ Project initialized successfully!</span>
+                        </div>
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">citrus deploy --production</span>
+                        </div>
+                        <div class="output">
+                            🌍 Deploying to production...
+                            <br><br>
+                            → Building assets
+                            <br>
+                            → Running security checks
+                            <br>
+                            → Optimizing database
+                            <br>
+                            → Configuring CDN
+                            <br><br>
+                            <span class="success">✓ Deployment complete!</span>
+                            <br>
+                            📍 Live URL: <span class="highlight">https://my-awesome-site.citrus.io</span>
+                            <br>
+                            ⚡️ Time: <span class="highlight">32s</span>
+                        </div>
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">_</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

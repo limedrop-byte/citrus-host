@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Bauhaus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --primary-blue: #0000FF;
+            --primary-yellow: #FFD700;
+            --black: #000000;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .bauhaus-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            top: -150px;
+            left: -150px;
+        }
+
+        .square {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-blue);
+            bottom: -100px;
+            right: -100px;
+            transform: rotate(45deg);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 260px solid var(--primary-yellow);
+            top: 50%;
+            left: 60%;
+            transform: rotate(15deg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        header {
+            padding: 2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            align-items: center;
+            padding: 8rem 0;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .visual-element {
+            position: absolute;
+        }
+
+        .visual-circle {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .visual-square {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-blue);
+            top: 20%;
+            left: 20%;
+        }
+
+        .visual-triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 173px solid var(--primary-yellow);
+            bottom: 20%;
+            right: 20%;
+        }
+
+        .bauhaus-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bauhaus-button:hover {
+            background: var(--primary-red);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin: 8rem 0;
+        }
+
+        .feature {
+            position: relative;
+            padding: 2rem;
+            background: var(--white);
+            border: 2px solid var(--black);
+        }
+
+        .feature-icon {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 3rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bauhaus-shapes">
+        <div class="shape circle"></div>
+        <div class="shape square"></div>
+        <div class="shape triangle"></div>
+    </div>
+    
+    <header>
+        <nav class="nav container">
+            <a href="#" class="logo">Citrus</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <h1 class="hero-title">Form Follows Function</h1>
+                <p class="hero-subtitle">WordPress hosting stripped down to its essential elements. Pure. Simple. Effective.</p>
+                <a href="#" class="bauhaus-button">Begin Now</a>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-element visual-circle"></div>
+                <div class="visual-element visual-square"></div>
+                <div class="visual-element visual-triangle"></div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">01</div>
+                    <h3 class="feature-title">Speed</h3>
+                    <p class="feature-description">Performance reduced to its purest form</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">02</div>
+                    <h3 class="feature-title">Structure</h3>
+                    <p class="feature-description">Architecture built on solid principles</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">03</div>
+                    <h3 class="feature-title">Balance</h3>
+                    <p class="feature-description">Perfect harmony of form and function</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html> 

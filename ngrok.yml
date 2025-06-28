@@ -1,0 +1,15 @@
+version: 2
+authtoken: 2x1FzBrfcqaHhWdiuE8RdPt2F7M_31zPoHWbo5xSPZ3H21rxL
+tunnels:
+  frontend:
+    proto: http
+    addr: 3000
+    subdomain: citrus-frontend
+  backend:
+    proto: http
+    addr: 5000
+    subdomain: citrus-backend
+  engine:
+    proto: http
+    addr: 3456
+    subdomain: citrus-engine

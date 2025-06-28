@@ -1,0 +1,6 @@
+## Delete all site! ##
+
+for site in $(ee site list --format=csv | tail -n +2 | cut -d',' -f1); do
+    ee site delete $site --yes
+done
+

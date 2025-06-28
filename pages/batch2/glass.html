@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Glass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent: #2DD4BF;
+            --accent-glow: rgba(45, 212, 191, 0.3);
+            --background: #0F172A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro Display', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            position: relative;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.15) 0%, transparent 50%);
+        }
+
+        .glass-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            background: radial-gradient(circle at center, var(--accent-glow), transparent);
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.3), transparent);
+        }
+
+        header {
+            padding: 1.2rem 0;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            max-width: 980px;
+            width: 100%;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.7rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.022em;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .primary-button {
+            background: var(--accent);
+            color: var(--background);
+            padding: 0.8rem 1.8rem;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .secondary-button {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            padding: 0.8rem 1.8rem;
+            border-radius: 980px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--text);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 24px;
+            text-align: left;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(45, 212, 191, 0.1);
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, var(--glass));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .orb-1, .orb-2 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glass-orb orb-1"></div>
+        <div class="glass-orb orb-2"></div>
+        
+        <header>
+            <nav class="nav">
+                <a href="#" class="logo">citrus</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content">
+                <h1 class="title">Crystalline WordPress hosting.</h1>
+                <p class="subtitle">Clear. Transparent. Brilliantly engineered.</p>
+                
+                <div class="cta-container">
+                    <a href="#" class="primary-button">Start Free</a>
+                    <a href="#" class="secondary-button">View Features ›</a>
+                </div>
+
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">💎</div>
+                        <h3 class="feature-title">Crystal Clear</h3>
+                        <p class="feature-description">Transparent pricing and performance metrics at every tier.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✨</div>
+                        <h3 class="feature-title">Polished Experience</h3>
+                        <p class="feature-description">Refined dashboard with intuitive controls and insights.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🌟</div>
+                        <h3 class="feature-title">Brilliant Support</h3>
+                        <p class="feature-description">24/7 expert assistance to keep your site shining.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

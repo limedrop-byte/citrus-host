@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Editorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #FFFCF8;
+            --text: #1A1A1A;
+            --accent: #FF4D00;
+            --accent-light: #FF6B33;
+            --border: #E5E5E5;
+            --surface: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .logo {
+            grid-column: 1 / 4;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 2rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .header-meta {
+            grid-column: 4 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .edition {
+            font-size: 0.875rem;
+            color: var(--text);
+            opacity: 0.6;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .hero-content {
+            grid-column: 2 / 7;
+            padding-right: 2rem;
+        }
+
+        .hero-image {
+            grid-column: 7 / 12;
+            aspect-ratio: 4/3;
+            background: var(--accent);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+
+        .subheadline {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .feature {
+            position: relative;
+        }
+
+        .feature-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.1;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+            z-index: 0;
+        }
+
+        .feature-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            background: var(--surface);
+            padding: 4rem;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial {
+            grid-column: span 4;
+            padding: 2rem;
+            border-left: 2px solid var(--accent);
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .author {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .company {
+            font-size: 0.875rem;
+            color: var(--text);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-column: 1 / 8;
+            }
+
+            .hero-image {
+                grid-column: 8 / -1;
+            }
+
+            .headline {
+                font-size: 3.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .testimonial {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                grid-column: 1 / -1;
+                padding-right: 0;
+            }
+
+            .hero-image {
+                grid-column: 1 / -1;
+                margin-top: 2rem;
+            }
+
+            .headline {
+                font-size: 2.5rem;
+            }
+
+            .subheadline {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">citrus</a>
+            <div class="header-meta">
+                <span class="date">June 2024</span>
+                <span class="edition">WordPress Hosting Review</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="headline">The Art of WordPress Performance</h1>
+                <p class="subheadline">Experience hosting that transforms your digital presence from ordinary to extraordinary. Where technology meets artistry.</p>
+                <a href="#" class="cta">Start Your Masterpiece</a>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="feature-number">01</div>
+                <div class="feature-content">
+                    <h2 class="feature-title">Architectural Excellence</h2>
+                    <p class="feature-description">Built on a foundation of cutting-edge server technology, optimized for WordPress at every layer. Experience load times that feel instantaneous.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-number">02</div>
+                <div class="feature-content">
+                    <h2 class="feature-title">Creative Freedom</h2>
+                    <p class="feature-description">Unlimited resources, zero restrictions. Your creativity shouldn't be bound by technical limitations. Build without boundaries.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-number">03</div>
+                <div class="feature-content">
+                    <h2 class="feature-title">Curator's Support</h2>
+                    <p class="feature-description">Our experts are more than technicians—they're digital curators, ensuring your WordPress site performs flawlessly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="testimonial">
+                <p class="quote">"Citrus transformed our online presence. The speed improvement was immediately noticeable."</p>
+                <p class="author">Sarah Chen</p>
+                <p class="company">Design Director, Artscape</p>
+            </div>
+            <div class="testimonial">
+                <p class="quote">"Finally, hosting that understands the needs of creative professionals."</p>
+                <p class="author">Marcus Rodriguez</p>
+                <p class="company">Creative Lead, Studio Volta</p>
+            </div>
+            <div class="testimonial">
+                <p class="quote">"The perfect blend of performance and aesthetics. Exactly what we needed."</p>
+                <p class="author">Emma Thompson</p>
+                <p class="company">Founder, Digital Canvas</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

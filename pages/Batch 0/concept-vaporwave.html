@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Vaporwave Concept</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #FF00FF;
+            --neon-blue: #00FFFF;
+            --neon-purple: #9D00FF;
+            --dark: #000033;
+            --grid-color: rgba(255, 0, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background: var(--dark);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .retro-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(0,0,0,0) 0%,
+                    var(--grid-color) 100%),
+                linear-gradient(to right,
+                    var(--grid-color) 1px,
+                    transparent 1px) 0 0 / 40px 100%,
+                linear-gradient(to bottom,
+                    var(--grid-color) 1px,
+                    transparent 1px) 0 0 / 100% 40px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            to {
+                background-position: 
+                    0 0,
+                    40px 100%,
+                    0 40px;
+            }
+        }
+
+        .sun {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to top, var(--neon-pink), var(--neon-purple));
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px var(--neon-pink),
+                0 0 120px var(--neon-purple);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(0, 0, 51, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            text-shadow: 
+                2px 2px var(--neon-pink),
+                -2px -2px var(--neon-purple);
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px,0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px,0) skew(0deg);
+            }
+            62% {
+                transform: translate(0,0) skew(5deg); 
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            color: var(--neon-blue);
+            text-shadow: 
+                3px 3px var(--neon-pink),
+                -3px -3px var(--neon-purple);
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Retro Cards */
+        .retro-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .retro-card {
+            background: rgba(0, 0, 51, 0.5);
+            border: 2px solid var(--neon-blue);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+
+        .retro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 0 30px var(--neon-blue),
+                0 0 60px var(--neon-purple);
+        }
+
+        .retro-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(45deg) translateY(-100%);
+            }
+            100% {
+                transform: rotate(45deg) translateY(100%);
+            }
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .card-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+        }
+
+        .card-description {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        /* Retro Button */
+        .retro-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--neon-purple);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 
+                4px 4px var(--neon-pink),
+                -4px -4px var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+
+        .retro-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 
+                2px 2px var(--neon-pink),
+                -2px -2px var(--neon-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .retro-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="retro-grid"></div>
+    <div class="sun"></div>
+    
+    <header>
+        <nav class="nav">
+            <a href="#" class="logo">CITRUS.EXE</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">WELCOME TO THE<br>FUTURE OF HOSTING</h1>
+                    <p class="hero-subtitle">[ LOADING AWESOME EXPERIENCE... ]</p>
+                    <a href="#" class="retro-btn">INITIALIZE</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="retro-cards">
+                <div class="retro-card">
+                    <div class="card-icon">💾</div>
+                    <h3 class="card-title">TURBO MODE</h3>
+                    <p class="card-description">Hyperspace-speed loading times</p>
+                </div>
+                <div class="retro-card">
+                    <div class="card-icon">🎮</div>
+                    <h3 class="card-title">POWER UP</h3>
+                    <p class="card-description">Level up your WordPress game</p>
+                </div>
+                <div class="retro-card">
+                    <div class="card-icon">🔐</div>
+                    <h3 class="card-title">FIREWALL++</h3>
+                    <p class="card-description">Maximum security engaged</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html> 

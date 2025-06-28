@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citrus · Dark Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #000000;
+            --surface: #1C1C1E;
+            --surface-elevated: #2C2C2E;
+            --text: #FFFFFF;
+            --text-secondary: #98989F;
+            --accent: #0A84FF;
+            --accent-light: #0A90FF;
+            --glow: rgba(10, 132, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro Display', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            background: radial-gradient(circle at top center, var(--surface) 0%, var(--background) 100%);
+        }
+
+        header {
+            padding: 1.2rem 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .content {
+            max-width: 980px;
+            width: 100%;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #98989F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.7rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.022em;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .primary-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .primary-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .primary-button:hover {
+            background: var(--accent-light);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .secondary-button {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .secondary-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .secondary-button:hover::after {
+            width: 100%;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .feature {
+            background: var(--surface-elevated);
+            padding: 2rem;
+            border-radius: 24px;
+            text-align: left;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: var(--surface-elevated);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            filter: blur(20px);
+            opacity: 0.2;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .ambient-light {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 70% 30%, var(--glow) 0%, transparent 70%);
+            opacity: 0.4;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ambient-light"></div>
+        <header>
+            <nav class="nav">
+                <a href="#" class="logo">citrus</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content">
+                <h1 class="title">Pro-grade WordPress hosting.</h1>
+                <p class="subtitle">Unleash your site's full potential with enterprise performance.</p>
+                
+                <div class="cta-container">
+                    <a href="#" class="primary-button">Deploy Now</a>
+                    <a href="#" class="secondary-button">Compare Plans ›</a>
+                </div>
+
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">⚡️</div>
+                        <h3 class="feature-title">Extreme Performance</h3>
+                        <p class="feature-description">Server-side optimization and advanced caching for peak speed.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔐</div>
+                        <h3 class="feature-title">Zero-Trust Security</h3>
+                        <p class="feature-description">Enterprise-grade protection with real-time threat detection.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚙️</div>
+                        <h3 class="feature-title">Developer Tools</h3>
+                        <p class="feature-description">Advanced staging, Git deployment, and CLI access.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

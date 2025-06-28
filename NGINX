@@ -1,0 +1,169 @@
+server {
+    listen 80;
+    server_name citrushost.io www.citrushost.io;
+    
+    # Redirect HTTP to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+# Add new server block for engine WebSocket connections
+server {
+    listen 80;
+    server_name engine.citrushost.io;
+    
+    # Redirect HTTP to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name engine.citrushost.io;
+    
+    # SSL configuration
+    ssl_certificate /etc/letsencrypt/live/citrushost.io/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/citrushost.io/privkey.pem;
+    
+    # WebSocket-optimized configuration for Engine
+    location / {
+        proxy_pass http://localhost:5000;
+        
+        # Enhanced WebSocket settings
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        
+        # Forward all important headers
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # Extended timeouts to prevent disconnections
+        proxy_read_timeout 86400s;    # Set to 24 hours for long-running connections
+        proxy_send_timeout 86400s;    # Set to 24 hours
+        proxy_connect_timeout 60s;    # Keep this lower as it's only for initial connection
+        
+        # WebSocket optimization for stability
+        proxy_buffering off;          # Disable buffering for WebSocket
+        tcp_nodelay on;               # Reduce latency
+        
+        # Increased buffer sizes
+        proxy_buffer_size 128k;
+        proxy_buffers 4 256k;
+        proxy_busy_buffers_size 256k;
+        
+        # Keep connections alive longer
+        keepalive_timeout 86400s;
+        keepalive_requests 10000;
+        
+        # Pass custom headers (these are used by your WebSocket server)
+        proxy_set_header X-Client-Type $http_x_client_type;
+        proxy_set_header X-Commander-Id $http_x_commander_id;
+        proxy_set_header X-Commander-Key $http_x_commander_key;
+        
+        # Preserve all original request headers
+        proxy_pass_request_headers on;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name citrushost.io www.citrushost.io;
+    
+    # SSL configuration
+    ssl_certificate /etc/letsencrypt/live/citrushost.io/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/citrushost.io/privkey.pem;
+    
+    # Frontend routes - proxy to the running frontend server on port 3000
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Admin API routes
+    location /api/admin/ {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header Content-Type $http_content_type;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Add these WebSocket-specific settings
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
+        proxy_connect_timeout 3600s;
+        proxy_buffering off;
+        proxy_buffer_size 128k;
+        proxy_buffers 4 256k;
+        proxy_busy_buffers_size 256k;
+        keepalive_timeout 3600s;
+        
+        # Preserve all original request headers
+        proxy_pass_request_headers on;
+    }
+    
+    # Backend API routes - everything except admin routes
+    location /api/ {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header Content-Type $http_content_type;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Add these WebSocket-specific settings
+        proxy_read_timeout 3600s;        # Increase read timeout to 1 hour
+        proxy_send_timeout 3600s;        # Increase send timeout to 1 hour
+        proxy_connect_timeout 3600s;     # Increase connect timeout to 1 hour
+        proxy_buffering off;             # Disable buffering for WebSocket
+        proxy_buffer_size 128k;          # Increase buffer size
+        proxy_buffers 4 256k;
+        proxy_busy_buffers_size 256k;
+        keepalive_timeout 3600s;         # Keep connections alive longer
+        
+        # Preserve all original request headers
+        proxy_pass_request_headers on;
+    }
+
+    # Engine specific routes
+    location /api/admin/engine/ {
+        proxy_pass http://localhost:5000/api/engine/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header Content-Type $http_content_type;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Add these WebSocket-specific settings
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
+        proxy_connect_timeout 3600s;
+        proxy_buffering off;
+        proxy_buffer_size 128k;
+        proxy_buffers 4 256k;
+        proxy_busy_buffers_size 256k;
+        keepalive_timeout 3600s;
+        
+        proxy_pass_request_headers on;
+    }
+}
