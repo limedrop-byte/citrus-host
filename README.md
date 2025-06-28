@@ -1,4 +1,7 @@
 Agent: https://github.com/limedrop-byte/citrus-agent
+
+Video Walkthough: https://www.youtube.com/watch?v=Rlm38HC25kA
+
 Coded by Christian Dunbar
 
 ## Application Overview
