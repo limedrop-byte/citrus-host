@@ -1,4 +1,5 @@
 Agent: https://github.com/limedrop-byte/citrus-agent
+Coded by Christian Dunbar
 
 ## Application Overview
 
@@ -25,8 +26,12 @@ Citrus Host is a web hosting platform built with a modern tech stack. The applic
 
 4. **Engine Service**
    - Handles site deployment operations
-   - Manages server configuration
-   - Executes system-level commands
+   - Manges websocket connections with Agents running on a VPS
+
+5. **System Agent**
+   - Runs at system level on managed servers
+   - Sends real-time status updates and metrics
+   - Connects to webapp engine via WebSocket
 
 ## Frontend Structure
 
